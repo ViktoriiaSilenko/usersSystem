@@ -1,11 +1,22 @@
 package com.spring.series.jdbc.dao.impl;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.*;
+import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Properties;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import com.spring.series.jdbc.dao.UserDAO;
@@ -21,6 +32,10 @@ public class UserDAOImpl implements UserDAO {
 	private static Statement stmt;
 	private static PreparedStatement pstmt;
 	private static ResultSet rs;
+
+	private static String userDB = readProperty("username");
+	private static String passwordDB = readProperty("password");
+	private static String url = readProperty("url");
 
 	public JdbcTemplate getJdbcTemplate() {
 		return jdbcTemplate;
@@ -55,11 +70,8 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public String insertNewUser(User user) {
 
-		String sql = "INSERT INTO User(user_id, username, email, password, user_to_category_category_id, " +
-				"user_to_category_category_category_id)" +
-				" VALUES(?, ?, ?, ?, ?, ?)";
 		int returnValue = getJdbcTemplate().update(
-				sql, 
+				sqlInsertUser,
 				new Object[] { user.getId(), user.getName(), user.getEmail(), user.getPassword(), user.getUserToCategoryCategoryId(),
 				user.getUserToCategoryCategoryCategoryId()});
 		if(1 == returnValue)
@@ -112,4 +124,23 @@ public class UserDAOImpl implements UserDAO {
 		return user;
 
 	}
+
+	private static String readProperty(String key) {
+		FileInputStream fis;
+		Properties property = new Properties();
+
+		try {
+			fis = new FileInputStream("src/main/resources/com/spring/series/jdbc/jdbc.properties");
+			property.load(fis);
+
+			return property.getProperty(key);
+
+
+		} catch (IOException e) {
+			System.err.println("ОШИБКА: Файл свойств отсуствует!");
+		}
+
+		return "";
+	}
+
 }

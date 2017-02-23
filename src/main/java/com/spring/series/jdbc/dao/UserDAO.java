@@ -8,10 +8,9 @@ public interface UserDAO {
 
 	String sqlGetById = "SELECT * FROM user WHERE user_id = ?";
 	String sqlGetAll = "SELECT * FROM user";
-
-	String url = "jdbc:mysql://localhost:3306/mydb";
-	String userDB = "root";
-	String passwordDB = "123456";
+	String sqlInsertUser = "INSERT INTO User(user_id, username, email, password, user_to_category_category_id, " +
+			"user_to_category_category_category_id)" +
+			" VALUES(?, ?, ?, ?, ?, ?)";
 
 	User getUser(int userId);
 	String insertNewUser(User user);
