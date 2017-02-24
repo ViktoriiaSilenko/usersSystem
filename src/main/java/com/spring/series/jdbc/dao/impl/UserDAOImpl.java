@@ -98,6 +98,40 @@ public class UserDAOImpl implements UserDAO {
 		return users;
 	}
 
+	@Override
+	public String updateUserByName (int userId, String userName) {
+		return updateUserByProperty (userId, userName, sqlUpdateUserByName);
+	}
+
+	@Override
+	public String updateUserByPassword (int userId, String userPassword) {
+		return updateUserByProperty (userId, userPassword, sqlUpdateUserByPassword);
+	}
+
+	private String updateUserByProperty (int userId, String property, String sql) {
+		try {
+			con = DriverManager.getConnection(url, userDB, passwordDB);
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, property);
+			pstmt.setInt(2, userId);
+
+			int returnValue = pstmt.executeUpdate();
+
+			if(1 == returnValue)
+				return "User updating is SUCCESS";
+			else
+				return "User updating is FAILURE";
+
+		} catch (SQLException sqlEx) {
+			sqlEx.printStackTrace();
+			return "sql error";
+		} finally {
+			try { con.close(); } catch(SQLException se) {  }
+			try { pstmt.close(); } catch(SQLException se) {  }
+			try { rs.close(); } catch(SQLException se) {  }
+		}
+	}
+
 	private User getUserFromResultSet (ResultSet rs) {
 		User user = new User();
 		try {

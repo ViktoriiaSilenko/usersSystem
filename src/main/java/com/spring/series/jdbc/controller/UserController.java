@@ -51,5 +51,19 @@ public class UserController {
 
     }
 
+    @RequestMapping(value= "/users/by_name/{id}", method = RequestMethod.PUT)
+    public String updateUserByName(@PathVariable("id") int id, Model model, @ModelAttribute("name") String name){
+        String result = userService.updateUserByName(id, name);
+        model.addAttribute("user", userService.getUser(id));
+        return result;
+    }
+
+    @RequestMapping(value= "/users/by_password/{id}", method = RequestMethod.PUT)
+    public String updateUserByPassword(@PathVariable("id") int id, Model model, @ModelAttribute("password") String password){
+        String result = userService.updateUserByPassword(id, password);
+        model.addAttribute("user", userService.getUser(id));
+        return result;
+    }
+
 
 }

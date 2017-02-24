@@ -35,4 +35,16 @@ public class UserServiceImpl implements UserService {
         return userDAO.getAllUsers();
     }
 
+    @Override
+    @Transactional
+    public String updateUserByName(int userId, String userName) {
+        return userDAO.updateUserByName(userId, userName);
+    }
+
+    @Override
+    @Transactional
+    public String updateUserByPassword(int userId, String userPassword) {
+        return userDAO.updateUserByName(userId, userPassword);
+    }
+
 }
