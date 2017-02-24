@@ -20,7 +20,7 @@
     <packaging>war</packaging>
 	<name>SpringJDBCTemplate</name>
 	<url>http://maven.apache.org</url>
-	<description>This example uses JDBCTemplate to interact with database</description>
+	<description>Spring JDBC project</description>
 
 	<properties>
 		<spring.version>4.0.0.RELEASE</spring.version>

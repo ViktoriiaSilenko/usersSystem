@@ -83,4 +83,17 @@ public class User {
 	public void setUserToCategoryCategoryId(int userToCategoryCategoryId) {
 		this.userToCategoryCategoryId = userToCategoryCategoryId;
 	}
+
+	@Override
+	public String toString() {
+		return "User{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", email='" + email + '\'' +
+				", password='" + password + '\'' +
+				", timestamp=" + timestamp +
+				", userToCategoryCategoryCategoryId=" + userToCategoryCategoryCategoryId +
+				", userToCategoryCategoryId=" + userToCategoryCategoryId +
+				'}';
+	}
 }

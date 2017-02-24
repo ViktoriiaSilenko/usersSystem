@@ -26,7 +26,7 @@ public class TestUserInfo {
 		System.out.println(user.getId() + "\t" + user.getName() + "\t" + user.getPassword() + "\t"
 				+ user.getEmail());
 
-		User newUser = new User(4, "Vasya", "vasya@gmail.com", "111111", new Timestamp(System.currentTimeMillis()),
+		User newUser = new User(9, "Vasya", "vasya@gmail.com", "111111", new Timestamp(System.currentTimeMillis()),
 				1,1);
 
 		String returnStr = userDAO.insertNewUser(newUser);
