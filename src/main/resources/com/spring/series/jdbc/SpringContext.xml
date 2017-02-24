@@ -20,6 +20,10 @@
 		  class="com.spring.series.jdbc.dao.impl.UserDAOImpl">
 	</bean>
 
+	<bean id="userService"
+		  class="com.spring.series.jdbc.service.impl.UserServiceImpl">
+	</bean>
+
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations" value="classpath:com/spring/series/jdbc/jdbc.properties"/>
 	</bean>
